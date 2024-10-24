@@ -8,8 +8,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.4</version> <!-- Reverted to the latest stable version -->
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>3.3.4</version>
+        <relativePath/>
     </parent>
 
     <groupId>com.example</groupId>
@@ -20,67 +20,29 @@
 
     <properties>
         <java.version>17</java.version>
-        <!-- Define Spring Authorization Server version -->
-        <spring.security.oauth2.authorization.server.version>1.1.1</spring.security.oauth2.authorization.server.version>
     </properties>
-
-    <repositories>
-        <!-- Maven Central Repository -->
-<!--        <repository>-->
-<!--            <id>central</id>-->
-<!--            <name>Maven Central</name>-->
-<!--            <url>https://repo.maven.apache.org/maven2</url>-->
-<!--            <releases>-->
-<!--                <enabled>true</enabled>-->
-<!--            </releases>-->
-<!--            <snapshots>-->
-<!--                <enabled>false</enabled>-->
-<!--            </snapshots>-->
-<!--        </repository>-->
-
-        <!-- Spring Milestones Repository -->
-<!--        <repository>-->
-<!--            <id>spring-milestones</id>-->
-<!--            <name>Spring Milestones</name>-->
-<!--            <url>https://repo.spring.io/milestone</url>-->
-<!--        </repository>-->
-
-        <!-- Spring Snapshots Repository -->
-<!--        <repository>-->
-<!--            <id>spring-snapshots</id>-->
-<!--            <name>Spring Snapshots</name>-->
-<!--            <url>https://repo.spring.io/snapshot</url>-->
-<!--            <snapshots>-->
-<!--                <enabled>true</enabled>-->
-<!--            </snapshots>-->
-<!--        </repository>-->
-    </repositories>
 
     <dependencyManagement>
         <dependencies>
-            <!-- Override Spring Context to a secure version -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>6.1.14</version> <!-- Updated secure version -->
+                <version>6.1.14</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-        <!-- Spring Boot Starter Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- Spring Boot Starter Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Spring Boot Starter Test with Exclusion -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -93,21 +55,17 @@
             </exclusions>
         </dependency>
 
-        <!-- Spring Security Test -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- Spring Authorization Server -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-authorization-server</artifactId>
-<!--            <version>1.3.2</version> &lt;!&ndash; Use latest stable &ndash;&gt;-->
         </dependency>
 
-        <!-- Nimbus JOSE JWT for JWT processing -->
         <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
@@ -117,7 +75,6 @@
 
     <build>
         <plugins>
-            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
