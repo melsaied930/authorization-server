@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "d03c7cbe-2ebc-4326-a0b9-f14b707799c8",
+		"name": "authorization-server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19098906"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/oauth2/token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Access token is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData.access_token).to.be.a('string').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"pm.test(\"Token type is a valid type\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.token_type).to.exist.and.to.be.a('string');",
+							"    pm.expect(responseData.token_type.toLowerCase()).to.equal('bearer');",
+							"});",
+							"",
+							"pm.test(\"Expires_in is a positive integer\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.expires_in).to.be.a('number');",
+							"    pm.expect(responseData.expires_in).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.access_token).to.exist;",
+							"    pm.expect(responseData.scope).to.exist;",
+							"    pm.expect(responseData.token_type).to.exist;",
+							"    pm.expect(responseData.expires_in).to.exist;",
+							"});",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.have.property('access_token');",
+							"    pm.expect(responseData).to.have.property('scope');",
+							"    pm.expect(responseData).to.have.property('token_type');",
+							"    pm.expect(responseData).to.have.property('expires_in');",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "client-id",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "client-secret",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "read write",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/oauth2/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
