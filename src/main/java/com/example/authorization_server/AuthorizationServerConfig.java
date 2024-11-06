@@ -2,7 +2,7 @@
   curl -i -X POST \
   -u client-id:client-secret \
   -d 'grant_type=client_credentials&scope=read write' \
-  http://localhost:8080/oauth2/token
+  https://localhost:8443/oauth2/token
 */
 
 package com.example.authorization_server;
@@ -62,8 +62,8 @@ public class AuthorizationServerConfig {
         RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client-id") // Replace with your client ID
                 .clientSecret(passwordEncoder.encode("client-secret")) // Replace with your client secret
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .scope("read")
                 .scope("write")
                 .tokenSettings(TokenSettings.builder()
